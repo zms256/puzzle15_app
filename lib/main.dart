@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: '15 puzzle'),
+      home: MyHomePage(title: '15 puzzle App'),
     );
   }
 }
