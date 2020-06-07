@@ -28,11 +28,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<int> _shuffle = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  List<int> _topList = [1, 2, 3];
+  List<int> _cntList = [4, 5, 6];
+  List<int> _btmList = [0, 7, 8];
 
-  void _incrementCounter() {
+  void _gameStart(){
+    _shuffle.shuffle();
     setState(() {
-      _counter++;
+      _topList = [_shuffle[0], _shuffle[1], _shuffle[2]];
+      _cntList = [_shuffle[3], _shuffle[4], _shuffle[5]];
+      _btmList = [_shuffle[6], _shuffle[7], _shuffle[8]];
     });
   }
 
@@ -46,20 +52,163 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Padding(
+              padding: EdgeInsets.only(top: 50.0, bottom: 30.0),
+              child: FlatButton(
+                onPressed: (){
+                  _gameStart();
+                },
+                child: Text(
+                  'Tap here',
+                  style: TextStyle(fontSize: 30),
+                ),
+              )
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Expanded(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _topList[0].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _topList[1].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _topList[2].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _cntList[0].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _cntList[1].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _cntList[2].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _btmList[0].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _btmList[1].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  _btmList[2].toString(),
+                                  style: TextStyle(fontSize: 50),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
