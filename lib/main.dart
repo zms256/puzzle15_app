@@ -34,10 +34,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ['4', '5', '6'],
     ['7', '8', '']
   ];
-  bool _top;
-  bool _cnt;
-  bool _btm;
-  int _index;
+  List<List<String>> _endList = [
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '']
+  ];
+  int _emptyIndex;
 
   void _gameStart() {
     _shuffle.shuffle();
@@ -50,51 +52,67 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _changeNum(number) {
-    /*List<int> _sideNum = [];
+  void _changeNum(num1, num2) {
+    List<int> _sideIndexList = [];
     List<String> _okList = [];
-    _top = _topList.contains('');
-    _cnt = _cntList.contains('');
-    _btm = _btmList.contains('');
+    int i = 0;
+    int n = 0;
+    var tmp;
+    _numList.forEach((_emptyElement) {
+      if (_emptyElement.contains('')) {
+        _emptyIndex = _emptyElement.indexOf('');
 
-    _switchIndex(int index) {
-      switch (_index) {
-        case 0:
-          _sideNum.add(1);
-          break;
-        case 1:
-          _sideNum.add(0);
-          _sideNum.add(2);
-          break;
-        case 2:
-          _sideNum.add(1);
-          break;
+        switch (_emptyIndex) {
+          case 0:
+            _sideIndexList.add(1);
+            break;
+          case 1:
+            _sideIndexList.add(0);
+            _sideIndexList.add(2);
+            break;
+          case 2:
+            _sideIndexList.add(1);
+            break;
+        }
+
+        _numList.forEach((_verticalElement) {
+          if ((_verticalElement == _emptyElement) == false && i == 1) {
+            _okList.add(_verticalElement[_emptyIndex]);
+          } else if ((_verticalElement == _emptyElement) == false && i == 0) {
+            if (n != 2) {
+              _okList.add(_verticalElement[_emptyIndex]);
+            }
+          } else if ((_verticalElement == _emptyElement) == false && i == 2) {
+            if (n != 0) {
+              _okList.add(_verticalElement[_emptyIndex]);
+            }
+          }
+          n++;
+        });
+
+        _sideIndexList.forEach((_sideElement) {
+          _okList.add(_emptyElement[_sideElement]);
+        });
+
+        setState(() {
+          if (_okList.contains(_numList[num1][num2])) {
+            tmp = _numList[num1][num2];
+            _numList[num1][num2] = _emptyElement[_emptyIndex];
+            _emptyElement[_emptyIndex] = tmp;
+          }
+        });
       }
+      i++;
+    });
+    if (_numList.toString() == _endList.toString()){
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title :Text('おめでとう'),
+            content: Text('ゲームクリア！'),
+          )
+      );
     }
-
-    if (_top == true) {
-      _index = _topList.indexOf('');
-      _switchIndex(_index);
-      _sideNum.forEach((element) {
-        _okList.add(_topList[element]);
-      });
-      _okList.add(_cntList[_index]);
-    } else if (_cnt == true) {
-      _index = _cntList.indexOf('');
-      _switchIndex(_index);
-      _sideNum.forEach((element) {
-        _okList.add(_cntList[element]);
-      });
-      _okList.add(_topList[_index]);
-      _okList.add(_btmList[_index]);
-    } else if (_btm == true) {
-      _index = _btmList.indexOf('');
-      _switchIndex(_index);
-      _sideNum.forEach((element) {
-        _okList.add(_btmList[element]);
-      });
-      _okList.add(_cntList[_index]);
-    }*/
   }
 
   @override
@@ -131,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[0][0]);
+                                  _changeNum(0, 0);
                                 },
                                 child: Text(
                                   _numList[0][0],
@@ -146,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[0][1]);
+                                  _changeNum(0, 1);
                                 },
                                 child: Text(
                                   _numList[0][1],
@@ -161,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[0][2]);
+                                  _changeNum(0, 2);
                                 },
                                 child: Text(
                                   _numList[0][2],
@@ -182,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[1][0]);
+                                  _changeNum(1, 0);
                                 },
                                 child: Text(
                                   _numList[1][0],
@@ -197,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[1][1]);
+                                  _changeNum(1, 1);
                                 },
                                 child: Text(
                                   _numList[1][1],
@@ -212,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[1][2]);
+                                  _changeNum(1, 2);
                                 },
                                 child: Text(
                                   _numList[1][2],
@@ -233,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[2][0]);
+                                  _changeNum(2, 0);
                                 },
                                 child: Text(
                                   _numList[2][0],
@@ -248,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[2][1]);
+                                  _changeNum(2, 1);
                                 },
                                 child: Text(
                                   _numList[2][1],
@@ -263,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: double.infinity,
                               child: FlatButton(
                                 onPressed: () {
-                                  _changeNum(_numList[2][2]);
+                                  _changeNum(2, 2);
                                 },
                                 child: Text(
                                   _numList[2][2],
